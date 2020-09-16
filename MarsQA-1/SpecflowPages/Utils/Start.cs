@@ -3,7 +3,9 @@ using MarsQA_1.Pages;
 using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using TechTalk.SpecFlow;
@@ -20,7 +22,7 @@ namespace MarsQA_1.Utils
         {
             //launch the browser
             Initialize();
-            ExcelLibHelper.PopulateInCollection(@"MarsQA-1\SpecflowTests\Data\Mars.xlsx", "Credentials");
+            ExcelLibHelper.PopulateInCollection(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+@"\SpecflowTests\Data\Mars.xlsx", "Credentials");
             //call the SignIn class
             SignIn.SigninStep();
         }
