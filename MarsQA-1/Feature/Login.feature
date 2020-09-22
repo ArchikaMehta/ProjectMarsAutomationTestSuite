@@ -3,6 +3,7 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
 Scenario: Login to website
-	Given I login to the website
+	Given I navigate to the application portal
+	When I login using valid credentials
+	
