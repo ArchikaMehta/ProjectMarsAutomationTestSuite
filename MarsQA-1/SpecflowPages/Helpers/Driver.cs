@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using BoDi;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,44 +10,43 @@ using System.Threading.Tasks;
 
 namespace MarsQA_1.Helpers
 {
-    public class Driver
+    public abstract class Driver
     {
-        //Initialize the browser
-        public static IWebDriver driver { get; set; }
+        public readonly IWebDriver _driver;
 
-        public void Initialize()
+        //Created constructor for dependency injection
+        public Driver(IWebDriver driver)
         {
-            //Defining the browser
-            driver = new ChromeDriver();
-            TurnOnWait();
-
-            //Maximise the window
-            driver.Manage().Window.Maximize();
+            _driver = driver;
         }
-
         public static string BaseUrl
         {
             get { return ConstantHelpers.Url; }
         }
 
-
-        //Implicit Wait
-        public static void TurnOnWait()
+        public void NavigateUrl()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-
+            //Navigate to the application URL
+            _driver.Navigate().GoToUrl(BaseUrl);
         }
 
-        public static void NavigateUrl()
-        {
-            driver.Navigate().GoToUrl(BaseUrl);
-        }
+        //Implementing Explicit wait
 
-        //Close the browser
-        public void Close()
+        public static void WaitClickable(IWebDriver driver, String attribute, String value, int seconds)
         {
-            driver.Quit();
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+            if (attribute == "Id")
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible((By.Id(value))));
+            }
+            else if (attribute == "XPath")
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(value)));
+            }
+            else if (attribute == "CssSelector")
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(value)));
+            }
         }
-
     }
 }
