@@ -97,7 +97,6 @@ namespace MarsQA_1.SpecflowPages.Pages
         }
 
         //Web element for Skill level select drop down
-        //private IWebElement Level => _driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/div[2]/select"));
         private IWebElement LevelSelected => _driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/div[2]/select"));
 
         internal void SkillLevel(String SkillLevel)
@@ -181,7 +180,6 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Comparing Skill table content for Skill edit validation
             Assert.IsTrue(SkillVal.Text.Contains(EditedSkill));
         }
-
 
         //Web element for delete button in skill section
         private IWebElement DelSkill => _driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[2]"));

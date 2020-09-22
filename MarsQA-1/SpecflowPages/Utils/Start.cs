@@ -21,6 +21,7 @@ namespace MarsQA_1.Utils
     {
         //Initialize the browser
         private IWebDriver _driver;
+        //IOC object container using for dependency injection
         private readonly IObjectContainer _objectContainer;
 
         public Start(IObjectContainer objectContainer)
@@ -34,8 +35,6 @@ namespace MarsQA_1.Utils
             //launch the browser
             Initialize();
             ExcelLibHelper.PopulateInCollection(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\SpecflowTests\Data\Mars.xlsx", "Credentials");
-            //call the SignIn class
-            //SignIn.SigninStep();
             ExtentReports();
         }
 
