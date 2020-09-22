@@ -16,8 +16,7 @@ namespace MarsQA_1.Helpers
         //Screenshot
 
         public class SaveScreenShotClass
-        {
-            
+        {         
             public static string SaveScreenshot(IWebDriver driver, string ScreenShotFileName) // Definition
             {
                 var folderLocation = (ConstantHelpers.ScreenshotPath);
@@ -50,10 +49,10 @@ namespace MarsQA_1.Helpers
         {
             Extent = new ExtentReports(ConstantHelpers.ReportsPath, true, DisplayOrder.NewestFirst);
             Extent.LoadConfig(ConstantHelpers.ReportXMLPath);
+            test = Extent.StartTest("MARS Automation Test", "Test case execution for Mars");
         }
     }
     #endregion
-
 }
 
 
